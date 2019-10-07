@@ -15,8 +15,5 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
             selectorName = document.querySelector('.name');
             selector.innerHTML = `<img height="500px" width="500px" src="${pokemon.front_shiny}" />`
             selectorName.innerHTML = `<h3>Name: ${type.name} </h3> `
-        }
+        },
     );
-
-
-/// reload page
