@@ -1,1 +1,0 @@
-exports.myText = 'Hello from the my-module!';
