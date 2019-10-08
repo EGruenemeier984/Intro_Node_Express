@@ -1,20 +1,25 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-
 app.use(express.static('public'));
 
-app.get('/home', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
+app.post('/home', (req, res) => {
+	var query = req.body.userInput;
+	console.log(query);
+	res.render(query);
 });
 
-app.get('/fetchData.js', function(req, res) {
-    res.sendFile(path.join(__dirname + '/fetchData.js'));
+app.get('/home', (req, res) => {
+	res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.get('/', function(req, res) {
+app.get('/script.js', (req, res) => {
+    res.sendFile(path.join(__dirname + '/script.js'));
+});
+
+app.get('/', (req, res) => {
     res.redirect('/home')
-})
+});
 
 
 app.listen(5000);
@@ -24,8 +29,10 @@ var unirest = require("unirest");
 
 var req = unirest("GET", "https://deezerdevs-deezer.p.rapidapi.com/search");
 
+// console.log(req.body)
+
 req.query({
-	"q": "eminem"
+	"q": "logic"
 });
 
 req.headers({
@@ -38,5 +45,5 @@ req.end(function (res) {
 	if (res.error) throw new Error(res.error);
 
 	console.log(res.body);
-});
 
+});
