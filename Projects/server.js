@@ -7,7 +7,7 @@ app.use('/public', express.static('public'));
 app.set('view engine', 'ejs');
 
 app.get('/home', (req, res) => {
-    res.render('/views/pages/index.ejs');
+    res.render('pages/index.ejs');
 });
 
 app.get('/', (req, res) => {
@@ -15,11 +15,11 @@ app.get('/', (req, res) => {
 }); 
 
 app.get('/about', (req, res) => {
-    res.render('/views/pages/about.ejs');
+    res.render('pages/about.ejs');
 });
 
 app.post('/query-search', (req, res) => {
-    res.write("HELLO");
+    res.send("HELLO");
 });
 
 app.listen(port, function () {
@@ -31,24 +31,25 @@ app.listen(port, function () {
 });
 
 // get data from deezer api
-// var unirest = require("unirest");
+var unirest = require("unirest");
+
+var req = unirest("GET", "https://deezerdevs-deezer.p.rapidapi.com/search");
+
+    req.query({
+        "q": "logic"
+    });
+
+    req.headers({
+        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+        "x-rapidapi-key": "2bce11ac03mshe8d42c0304556a9p1c94a3jsn42a650c97186"
+    });
+
+
+    req.end(function (res) {
+        if (res.error) throw new Error(res.error);
+        console.log(res.body);
+    });  
 
 // const submitBtn = document.getElementById('submit');
 // submitBtn.addEventListener('click', async () => {
-//     var req = unirest("GET", "https://deezerdevs-deezer.p.rapidapi.com/search");
-
-//     req.query({
-//         "q": "logic"
-//     });
-
-//     req.headers({
-//         "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-//         "x-rapidapi-key": "2bce11ac03mshe8d42c0304556a9p1c94a3jsn42a650c97186"
-//     });
-
-
-//     req.end(function (res) {
-//         if (res.error) throw new Error(res.error);
-//         console.log(res.body);
-//     });
 // })
