@@ -19,7 +19,7 @@ app.get('/about', (req, res) => {
 });
 
 app.post('/query-search', (req, res) => {
-    res.send("HELLO");
+    res.render('pages/result.ejs');
 });
 
 app.listen(port, function () {
@@ -36,7 +36,7 @@ var unirest = require("unirest");
 var req = unirest("GET", "https://deezerdevs-deezer.p.rapidapi.com/search");
 
     req.query({
-        "q": "logic"
+        "q": "Pouya"
     });
 
     req.headers({
@@ -47,9 +47,10 @@ var req = unirest("GET", "https://deezerdevs-deezer.p.rapidapi.com/search");
 
     req.end(function (res) {
         if (res.error) throw new Error(res.error);
-        console.log(res.body);
+        const [...data] = res.id; 
+        console.log(data);
+        // const result = res.body;
+        // Object.keys(result).forEach((key) => {
+        //     console.log(result[key]);
+        // });
     });  
-
-// const submitBtn = document.getElementById('submit');
-// submitBtn.addEventListener('click', async () => {
-// })
